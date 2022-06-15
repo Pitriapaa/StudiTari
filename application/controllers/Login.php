@@ -16,6 +16,10 @@ class Login extends CI_Controller
 			'Title' => 'Studitari - ',
 			'SubTitle' => 'Login'
 		];
+		$Akses = $this->db->get_where('user', array('email' => $this->session->userdata('email')))->row_array();
+		if ($Akses) {
+			redirect('Dashboard');
+		}
 		$this->form_validation->set_rules('email', 'Email', 'required|valid_email');
 		$this->form_validation->set_rules('password', 'Password', 'required');
 		if ($this->form_validation->run() == false) {
@@ -61,6 +65,10 @@ class Login extends CI_Controller
 			'Title' => 'Studitari - ',
 			'SubTitle' => 'Register'
 		];
+		$Akses = $this->db->get_where('user', array('email' => $this->session->userdata('email')))->row_array();
+		if ($Akses) {
+			redirect('Dashboard');
+		}
 		$this->form_validation->set_rules('nama_depan', 'Nama Depan', 'required');
 		$this->form_validation->set_rules('nama_belakang', 'Nama Belakang', 'required');
 		$this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|is_unique[user.email]');
@@ -81,5 +89,16 @@ class Login extends CI_Controller
 		</div>');
 			redirect('Login');
 		}
+	}
+	public function Logout()
+	{
+		$this->session->unset_userdata('email');
+		$this->session->set_flashdata('Message', '<div class="sufee-alert alert with-close alert-primary alert-dismissible fade show">
+			Anda berhasil <strong>logout</strong>.
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>');
+		redirect('Login');
 	}
 }

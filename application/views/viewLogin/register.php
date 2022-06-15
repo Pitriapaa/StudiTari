@@ -9,7 +9,7 @@
             </a>
           </div>
           <div class="login-form">
-            <form action="" method="post">
+            <form action="" method="post" enctype="multipart/form-data">
               <div class="form-group">
                 <div class="row">
                   <div class="col-lg-6">
@@ -42,6 +42,14 @@
                 <label for="konfirmasipassword">Konfirmasi Password</label>
                 <input id="konfirmasipassword" class="au-input au-input--full" type="password" name="konfirpassword" placeholder="Confirmation Password">
                 <small class="text-danger"><?= form_error('konfirpassword'); ?></small>
+              </div>
+              <div class="row form-group">
+                <div class="col col-md-4">
+                  <label for="profile" class=" form-control-label">Gambar Profile</label>
+                </div>
+                <div class="col-12 col-md-9">
+                  <input type="file" id="profile" name="profile" class="form-control-file">
+                </div>
               </div>
               <button class="au-btn au-btn--block btn-info m-b-20" type="submit">register</button>
             </form>
